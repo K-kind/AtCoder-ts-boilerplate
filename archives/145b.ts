@@ -30,7 +30,19 @@ const getArgs = () => {
 
 // 実装の中身
 const main = (args: ArgArrays) => {
+  let result
+  const length = args[0][0]
+  if (length % 2 === 1) {
+    result = 'No'
+  } else {
+    const string = args[1][0]
+    const first = string.slice(0, (length / 2))
+    const last = string.slice(length / 2)
+    result = first === last ? 'Yes' : 'No'
+  }
+  console.log(result)
 }
 
-const args: ArgArrays = getArgs()
+// const args: ArgArrays = getArgs()
+const args: ArgArrays = [[1], ['z']]
 main(args)
