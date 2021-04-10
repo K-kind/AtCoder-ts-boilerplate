@@ -1,13 +1,16 @@
-const path = require('path');
+const path = require('path')
+
+const env = process.env.NODE_ENV || 'development'
+const isDevelopment = env === 'development'
+const entryFilename = isDevelopment ? 'main.dev' : 'main.prod'
+
 module.exports = {
-  entry: {
-    'main.dev': path.join(__dirname, 'src', 'main.dev.ts'),
-    'main.prod': path.join(__dirname, 'src', 'main.prod.ts')
-  },
+  entry: path.join(__dirname, 'src', `${entryFilename}.ts`),
   output: {
-    filename: '[name].js',
+    filename: `${entryFilename}.js`,
     path: path.join(__dirname, 'dist')
   },
+  devtool: isDevelopment ? 'inline-source-map' : false,
   target: 'node',
   resolve: {
     extensions: ['.ts']
@@ -19,4 +22,4 @@ module.exports = {
       exclude: /node_modules/
     }]
   }
-};
+}

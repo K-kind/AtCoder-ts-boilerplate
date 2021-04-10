@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "webpack --mode production",
-    "dev": "npm run build && node \"dist/main.dev\"",
+    "build": "cross-env NODE_ENV=production webpack --mode production && npm run copy",
+    "build:dev": "cross-env NODE_ENV=development webpack --mode development",
+    "dev": "npm run build:dev && node \"dist/main.dev\"",
+    "copy": "./scripts/copy-dist.sh",
     "archive": "./scripts/archive.sh",
     "reset": "./scripts/reset.sh",
     "finish": "./scripts/finish.sh",
@@ -13,6 +15,7 @@
   "devDependencies": {
     "@types/jest": "^26.0.22",
     "@types/node": "^14.14.35",
+    "cross-env": "^7.0.3",
     "jest": "^26.6.3",
     "ts-jest": "^26.5.4",
     "ts-loader": "^8.1.0",
