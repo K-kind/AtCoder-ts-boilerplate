@@ -22,7 +22,8 @@ function main() {
   if [ -n "${file_name}" ]; then
     archive "${cwd}" "${file_name}"
   else
-    echo '"Error: アーカイブするファイル名を指定してください"' && exit 1
+    local message="エラー: アーカイブするファイル名を指定してください\n指定方法: npm run finish -- ファイル名"
+    echo -e "${message}" && exit 1
   fi
 }
 

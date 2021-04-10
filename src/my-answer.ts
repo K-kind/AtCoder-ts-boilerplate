@@ -1,6 +1,6 @@
 import { Answer } from './lib/log-answer'
 
-/** 標準入力から受け取る引数の型 */
+/** 標準入力から受け取る引数の型（必ず2次元配列となる） */
 type Args = [number[], string[]]
 
 export default (args: unknown): Answer => {

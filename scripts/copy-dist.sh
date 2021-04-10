@@ -6,7 +6,9 @@ readonly BUNDLE_FILE_PATH='../dist/main.prod.js'
 # （pbcopyはOS Xのコマンド）
 function copy_dist() {
   local cwd="${1}"
-  pbcopy <"${cwd}/${BUNDLE_FILE_PATH}"
+
+  pbcopy <"${cwd}/${BUNDLE_FILE_PATH}" &&
+    echo "バンドル結果をクリップボードにコピーしました。"
 }
 
 function main() {
