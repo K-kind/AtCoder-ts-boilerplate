@@ -1,3 +1,6 @@
+// モジュールモードにするため（main.tsにコピーする際は除外）
+export {}
+
 const fs = require('fs')
 
 const number = 0 as number
