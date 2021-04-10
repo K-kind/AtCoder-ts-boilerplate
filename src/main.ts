@@ -3,7 +3,7 @@ const fs = require('fs')
 const number = 0 as number
 const string = 'string' as string
 
-// ここを変更
+// set arg types
 const ARG_TYPES = [
   number,
   string
@@ -28,7 +28,7 @@ const getArgs = () => {
   return args as ArgArrays
 }
 
-// 実装の中身
+// main program
 const main = (args: ArgArrays) => {
 }
 
