@@ -5,7 +5,9 @@
   "scripts": {
     "build": "webpack --mode production",
     "dev": "npm run build && node \"dist/main.dev\"",
-    "clean": "./clean.sh",
+    "archive": "./scripts/archive.sh",
+    "reset": "./scripts/reset.sh",
+    "finish": "./scripts/finish.sh",
     "test": "jest"
   },
   "devDependencies": {
