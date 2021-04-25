@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "build": "ncc build ./src/main.prod.ts -o dist -m && npm run copy",
+    "build:run": "npm run build && node ./dist/index.js",
     "watch": "node ./build/watch ./src/main.dev.ts",
     "copy": "./scripts/copy-dist.sh",
     "archive": "./scripts/archive.sh",

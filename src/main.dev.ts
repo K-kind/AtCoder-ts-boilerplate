@@ -1,8 +1,8 @@
-import myAnswer, { tmpArgs } from './my-answer'
+import myAnswer, { exampleArgs } from './my-answer'
 import logAnswer from './lib/log-answer'
 
 const main = () => {
-  const answer = myAnswer(tmpArgs)
+  const answer = myAnswer(exampleArgs)
   logAnswer(answer)
 }
 

@@ -1,15 +1,16 @@
 import { Answer } from './lib/log-answer'
 
-/** 標準入力から受け取る引数の型（必ず2次元配列となる） */
-type Args = [number[], string[]]
+/** 引数の例 */
+export const exampleArgs = [
+  [1, 2, 3],
+  ['TEST', 'TEST'],
+  [
+    [1, 2, 3],
+    [4, 5, 6],
+  ],
+] as const
 
-export default (args: unknown): Answer => {
-  const typedArgs = args as Args
+/** 解答 */
+export default (args: typeof exampleArgs): Answer => {
   return 'answer'
 }
-
-/** テスト用の引数 */
-export const tmpArgs: Args = [
-  [1, 2, 3],
-  ['test1', 'test2', 'test3']
-]
