@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readonly BUNDLE_FILE_PATH='../dist/main.prod.js'
+readonly BUNDLE_FILE_PATH='../dist/index.js'
 
 # バンドル後の提出用ファイルをクリップボードにコピー
 # （pbcopyはOS Xのコマンド）
