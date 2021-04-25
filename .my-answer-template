@@ -1,3 +1,4 @@
+import { Args } from './lib/get-args'
 import { Answer } from './lib/log-answer'
 
 /** 引数の例 */
@@ -11,6 +12,6 @@ export const exampleArgs = [
 ] as const
 
 /** 解答 */
-export default (args: typeof exampleArgs): Answer => {
+export default (args: Args): Answer => {
   return 'answer'
 }

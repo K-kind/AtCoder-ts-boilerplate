@@ -26,19 +26,29 @@ TEST
 …
 => [['TEST'], [[1, 2, 3], [4, 5, 6], [7, 8, 9], ...]]
 ******************************************************/
-/** キャストされた引数 */
-export type Args = readonly (
-  readonly (number | string)[]
-  | readonly (readonly (number | string)[])[]
-)[]
 
-type NotReadonlyArgs = (
-  (number | string)[]
-  | (number | string)[][]
-)[]
+/** 固定行数の列 */
+type FixedItems = readonly (number | string)[]
+/** 任意行数の列の配列 */
+type FluctuateItems = readonly FixedItems[]
+/** 全ての引数のパターン（型キャスト時に使用） */
+type WritableArgs = (FixedItems | FluctuateItems)[]
 
-const castItems = <T extends Args>(lines: string[], exampleArgs: T): T => {
-  const castLines: NotReadonlyArgs = []
+/** タプル型にするためにconst assersionした引数の型 */
+type ConstArgs = typeof exampleArgs
+
+/** 中身までliteralになった部分をnumber型等に戻す */
+type ShallowTuple<T> = {
+  -readonly [P in keyof T]:
+    T[P] extends FixedItems
+    ? T[P] extends readonly string[] ? string[] : number[]
+    : T[P] extends readonly (readonly string[])[] ? string[][] : number[][]
+}
+/** 引数の型の中身をliteralからnumbers等に戻した型 */
+export type Args = ShallowTuple<ConstArgs>
+
+const castItems = (lines: string[], exampleArgs: ConstArgs) => {
+  const castLines: WritableArgs = []
   exampleArgs.forEach(([firstExampleOfLine], exampleIndex) => {
     // 固定の各行をキャストして格納
     if (typeof firstExampleOfLine === 'number') {
@@ -65,7 +75,7 @@ const castItems = <T extends Args>(lines: string[], exampleArgs: T): T => {
     }
   })
 
-  return castLines as unknown as T
+  return castLines as Args
 }
 
 /** 'A B C ' => ['A', 'B', 'C'] */
