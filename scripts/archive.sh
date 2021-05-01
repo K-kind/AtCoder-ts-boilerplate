@@ -34,13 +34,12 @@ function archive() {
 
   local archive_directory_path="${cwd}/${ARCHIVES_PATH}/${directories}"
   # ディレクトリがない場合は作成
-  if [ -n "${directories}" ] && [ ! -d "${archive_directory_path}" ]; then
-    mkdir "${archive_directory_path}"
+  if [ ! -d "${archive_directory_path}" ]; then
+    mkdir -p "${archive_directory_path}"
   fi
 
   local archive_path="${archive_directory_path}${file_name}"
   # ファイル先頭に@ts-nocheckコメントを追加（importエラー非表示のため）
-  echo "${archive_path}"
   echo "// @ts-nocheck" >"${archive_path}"
   cat "${answer_file_path}" >>"${archive_path}"
 }
