@@ -50,7 +50,7 @@ export const exampleArgs = [
 // 解答を記載（Argsは自動で[string[], number[][]]の型になる）
 // 戻り値が自動でconsole.logされる（配列も可）
 export default (args: Args): Answer => {
-  const [[test], numbers] = args // test: string; numbers: number[]
+  const [[test], numbers] = args // test: string; numbers: number[][]
   return 'answer'
 }
 ```
