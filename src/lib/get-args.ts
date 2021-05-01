@@ -3,13 +3,12 @@ import { exampleArgs } from '../my-answer'
 
 /** 標準入力から受け取った引数を型キャストしたものを返す */
 export default () => {
-  const lines = getLines()
-  return castItems(lines, exampleArgs)
+  const linesStr = getLines()
+  return parseLines(linesStr, exampleArgs)
 }
 
 const getLines = () => {
-  const linesStr = fs.readFileSync('/dev/stdin', 'utf8')
-  return linesStr.trim().split('\n')
+  return fs.readFileSync('/dev/stdin', 'utf8')
 }
 
 /******************* 引数のキャスト *******************
@@ -47,16 +46,17 @@ type ShallowTuple<T> = {
 /** 引数の型の中身をliteralからnumbers等に戻した型 */
 export type Args = ShallowTuple<ConstArgs>
 
-const castItems = (lines: string[], exampleArgs: ConstArgs) => {
-  const castLines: WritableArgs = []
+const parseLines = (linesStr: string, exampleArgs: ConstArgs) => {
+  const lines = linesStr.trim().split('\n')
+  const parsedLines: WritableArgs = []
   exampleArgs.forEach(([firstExampleOfLine], exampleIndex) => {
     // 固定の各行をキャストして格納
     if (typeof firstExampleOfLine === 'number') {
-      castLines.push(splitToNumbers(lines[exampleIndex]))
+      parsedLines.push(splitToNumbers(lines[exampleIndex]))
       return
     }
     if (typeof firstExampleOfLine === 'string') {
-      castLines.push(splitToStrings(lines[exampleIndex]))
+      parsedLines.push(splitToStrings(lines[exampleIndex]))
       return
     }
     if (!Array.isArray(firstExampleOfLine)) {
@@ -66,16 +66,16 @@ const castItems = (lines: string[], exampleArgs: ConstArgs) => {
     // 任意行数の各行をキャストして1つの配列に格納
     const manyLines = lines.slice(exampleIndex)
     if (typeof firstExampleOfLine[0] === 'number') {
-      castLines.push(manyLines.map(splitToNumbers))
+      parsedLines.push(manyLines.map(splitToNumbers))
       return
     }
     if (typeof firstExampleOfLine[0] === 'string') {
-      castLines.push(manyLines.map(splitToStrings))
+      parsedLines.push(manyLines.map(splitToStrings))
       return
     }
   })
 
-  return castLines as Args
+  return parsedLines as Args
 }
 
 /** 'A B C ' => ['A', 'B', 'C'] */
