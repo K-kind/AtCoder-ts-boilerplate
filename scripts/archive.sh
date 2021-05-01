@@ -6,25 +6,50 @@ readonly ANSWER_FILE_PATH='../src/my-answer.ts'
 # 終了したコードをアーカイブに移動
 function archive() {
   local cwd="${1}"
-  local archive_file_name="${2}"
-  local archive_file_path="${cwd}/${ARCHIVES_PATH}/${archive_file_name}.ts"
   local answer_file_path="${cwd}/${ANSWER_FILE_PATH}"
 
-  mv "${answer_file_path}" "${archive_file_path}"
+  # 解答ファイルの2行目の内容（アーカイブ時のファイルパス）を取得
+  local archive_file_path
+  archive_file_path=$(sed -n 2p "${answer_file_path}")
+
+  if [ -z "${archive_file_path}" ]; then
+    local message="Error: No filename was given for archive file"
+    echo -e "${message}" && exit 1
+  fi
+
+  local directories
+  local file_name
+  # ディレクトリ名をファイル名と分離
+  if [[ ${archive_file_path} =~ ^(.+/)([^/]+)$ ]]; then
+    directories="${BASH_REMATCH[1]}"
+    file_name="${BASH_REMATCH[2]}"
+  else
+    file_name="${archive_file_path}"
+  fi
+
+  # ファイル名に拡張子を付与
+  if [[ ! ${file_name} =~ ^\.ts$ ]]; then
+    file_name="${file_name}.ts"
+  fi
+
+  local archive_directory_path="${cwd}/${ARCHIVES_PATH}/${directories}"
+  # ディレクトリがない場合は作成
+  if [ -n "${directories}" ] && [ ! -d "${archive_directory_path}" ]; then
+    mkdir "${archive_directory_path}"
+  fi
+
+  local archive_path="${archive_directory_path}${file_name}"
+  # ファイル先頭に@ts-nocheckコメントを追加（importエラー非表示のため）
+  echo "${archive_path}"
+  echo "// @ts-nocheck" >"${archive_path}"
+  cat "${answer_file_path}" >>"${archive_path}"
 }
 
 function main() {
-  local file_name="${1}"
   local cwd
   cwd="$(cd "$(dirname "$0")" && pwd)"
 
-  # [-n "${arg}"]は空ではない場合、[-z "${arg}"]は空の場合
-  if [ -n "${file_name}" ]; then
-    archive "${cwd}" "${file_name}"
-  else
-    local message="エラー: アーカイブするファイル名を指定してください\n指定方法: npm run finish -- ファイル名"
-    echo -e "${message}" && exit 1
-  fi
+  archive "${cwd}"
 }
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then

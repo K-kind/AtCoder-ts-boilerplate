@@ -1,5 +1,5 @@
 {
-  "name": "at_coder_ts_boilerplate",
+  "name": "algorithm-solving-with-ts",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -9,7 +9,7 @@
     "copy": "./scripts/copy-dist.sh",
     "archive": "./scripts/archive.sh",
     "reset": "./scripts/reset.sh",
-    "finish": "./scripts/finish.sh",
+    "finish": "npm run archive && npm run reset",
     "test": "jest"
   },
   "devDependencies": {

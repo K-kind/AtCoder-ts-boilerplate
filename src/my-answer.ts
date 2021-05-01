@@ -1,7 +1,11 @@
+/* === Archive filename === /
+
+/ ======================== */
+
 import { Args } from './lib/get-args'
 import { Answer } from './lib/log-answer'
 
-/** 引数の例 */
+/** Example Arguments */
 export const exampleArgs = [
   [1, 2, 3],
   ['TEST', 'TEST'],
@@ -11,7 +15,7 @@ export const exampleArgs = [
   ],
 ] as const
 
-/** 解答 */
+/** Answer Code */
 export default (args: Args): Answer => {
   return 'answer'
 }
