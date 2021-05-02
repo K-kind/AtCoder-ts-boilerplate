@@ -71,9 +71,9 @@ npm run build
 `src/my-answer.ts` の先頭コメント行にアーカイブ時の保存パス（ファイル名のみでも可）を記入。
 
 ```ts
-/* === Archive filename === /
+/***** Archive filename *****
 abc199/A
-/ ======================== */
+*****************************/
 ```
 
 下記コマンドで、`src/my-answer.ts` の内容が `archives/abc199/A.ts` に移動される。
