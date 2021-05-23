@@ -16,6 +16,7 @@
     "@types/jest": "^26.0.22",
     "@types/node": "^14.14.35",
     "@vercel/ncc": "^0.28.4",
+    "clipboardy": "^2.3.0",
     "esbuild": "^0.11.16",
     "jest": "^26.6.3",
     "ts-jest": "^26.5.4",
