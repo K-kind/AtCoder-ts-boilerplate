@@ -7,7 +7,7 @@ import { Answer } from './lib/log-answer'
 
 /** Example Arguments */
 export const exampleArgs = [
-  [],
+
 ] as const
 
 /** Answer Code */
