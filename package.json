@@ -6,7 +6,7 @@
     "build": "node ./build/build && npm run copy",
     "build:run": "npm run build && node ./dist/main.prod.js",
     "watch": "node ./build/watch ./src/main.dev.ts",
-    "copy": "./scripts/copy-dist.sh",
+    "copy": "node ./scripts/copy-prod",
     "archive": "./scripts/archive.sh",
     "reset": "./scripts/reset.sh",
     "finish": "npm run archive && npm run reset",
