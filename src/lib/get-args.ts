@@ -49,6 +49,7 @@ export type Args = ShallowTuple<ConstArgs>
 const parseLines = (linesStr: string, exampleArgs: ConstArgs) => {
   const lines = linesStr.trim().split('\n')
   const parsedLines: WritableArgs = []
+  // @ts-ignore
   exampleArgs.forEach(([firstExampleOfLine], exampleIndex) => {
     // 固定の各行をキャストして格納
     if (typeof firstExampleOfLine === 'number') {

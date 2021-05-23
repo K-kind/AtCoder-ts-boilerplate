@@ -6,6 +6,7 @@
     "build": "node ./build/build && npm run copy",
     "build:run": "npm run build && node ./dist/main.prod.js",
     "watch": "node ./build/watch ./src/main.dev.ts",
+    "arg": "node ./scripts/parse-clipboard",
     "copy": "node ./scripts/copy-prod",
     "archive": "./scripts/archive.sh",
     "reset": "./scripts/reset.sh",
